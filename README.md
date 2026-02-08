@@ -9,19 +9,19 @@ This repository focuses on **Workspace A (no PHI)**: deterministic orchestration
 
 This project demonstrates how a SMART-on-FHIR application can be:
 
-- Designed **deterministically** (not conversationally)
+- Designed **deterministically**
 - Built with **least-privilege SMART scopes**
 - Audited through **reproducible artifacts**
 - Governed through **explicit workspace boundaries**
 
-Rather than emphasizing “smarter clinical reasoning,” the focus is on **correct orchestration, safe data boundaries, and reproducibility**, aligned with Epic SMART-on-FHIR constraints.
+the focus is on **correct orchestration, safe data boundaries, and reproducibility**, aligned with Epic SMART-on-FHIR constraints.
 
 
-## Architectural Blueprint (Sponsor-Aligned)
+## Architectural Blueprint
 
 This implementation follows a **workspace-based escalation model**:
 
-### Workspace A — Design & Scaffolding (this repository)
+### Workspace A — Design & Scaffolding
 - No PHI
 - Synthetic FHIR bundles only
 - Deterministic LangGraph orchestration
@@ -94,7 +94,7 @@ Capstone-ER/
 ## Project Status
 
 - Workspace A (design + scaffolding)
-- Workspace B (Epic sandbox) — future work
+- Workspace B (Epic sandbox) — following
 - Workspace C (secure PHI enclave) — out of scope
 
 
