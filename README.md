@@ -77,11 +77,19 @@ Capstone-ER/
 │
 ├─ notebooks/                 # sandbox for exploration & validation
 │  ├─ FHIR_exploration.ipynb
+|  |─ langsmith_demo.ipynb
 │  └─ synthetic_case.ipynb
 │
 ├─ .env        # API keys (ignored)
 ├─ .gitignore
 └─ README.md
+```
+#### Environment variables (`.env`)
+```
+OPENAI_API_KEY=sponsor_openai_key
+LANGSMITH_API_KEY=your_langsmith_key
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_PROJECT=Capstone-ED
 ```
 
 ## Technologies used
