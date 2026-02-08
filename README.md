@@ -43,6 +43,7 @@ Capstone-ER/
 │  ├─ router.py               # Agent routing logic
 │  ├─ agents/
 │  │  ├─ requirements.py      # Clinical or operational needs → technical intent
+|  |  ├─ requirements_LLM.py  # LLM-powered (demo / future)
 │  │  ├─ fhir_mapping.py      # Intent → FHIR resources & fields
 │  │  ├─ smart_compile.py     # SMART scopes & launch context
 │  │  ├─ scaffold.py          # repo / boilerplate generation
