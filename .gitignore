@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Generated artifacts
+artifact_store/
+trace_store/
+
+# LangSmith
+langsmith_runs/
+
+# OS
+.DS_Store
