@@ -57,7 +57,17 @@ Shared utilities used by agents:
 
 - `static_analysis.py`  
   Security-gate helpers used to detect unsafe patterns.
+### LLM-based Experimental Components
 
+We added an experimental LLM-based variant of the requirements agent for testing and future extension:
+
+- `agent_system/agents/requirements_LLM.py`
+LLM-powered version of the requirements agent using GPT-5 mini (max tokens: 3000).
+This is for prototyping and comparison with the rule-based agent.
+
+- `agent_system/graph_llm.py`
+LangGraph that uses the LLM-based requirements agent instead of the rule-based one.
+This graph is intended for demos, experimentation, and future development.
 ### Relationship to other modules
 
 - Consumes **derived indexes** from `fhir_loader/`(currently encouter/patient indexes)
