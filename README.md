@@ -39,11 +39,12 @@ Future work (not included in this repository):
 Capstone-ER/
 ├─ agent_system/              # LangGraph-based multi-agent orchestration
 │  ├─ graph.py                # control flow & checkpoints
+|  ├─ graph_llm.py            # LLM-based graph (test demo / future)
 │  ├─ state.py                # shared, PHI-safe state schema
 │  ├─ router.py               # Agent routing logic
 │  ├─ agents/
 │  │  ├─ requirements.py      # Clinical or operational needs → technical intent
-|  |  ├─ requirements_LLM.py  # LLM-powered (demo / future)
+|  |  ├─ requirements_LLM.py  # LLM-powered (test demo / future)
 │  │  ├─ fhir_mapping.py      # Intent → FHIR resources & fields
 │  │  ├─ smart_compile.py     # SMART scopes & launch context
 │  │  ├─ scaffold.py          # repo / boilerplate generation
