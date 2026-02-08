@@ -82,21 +82,6 @@ Capstone-ER/
 └─ README.md
 ```
 
-
-## fhir_loader: Design Rationale
-
-The `fhir_loader` module provides a **PHI-safe, local-only abstraction** over FHIR data so agents never interact with raw JSON or live endpoints.
-
-Key design principles:
-
-- No network calls
-- No PHI persistence beyond runtime
-- Read-only, derived indexes
-- Explicit guarantees (e.g., `encounter_id` may be `None`)
-
-This allows agents to reason over **FHIR structure**, not patient data.
-
-
 ## Technologies Used
 
 - Python
