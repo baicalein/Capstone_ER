@@ -4,27 +4,10 @@ Capstone_ER is a SMART-on-FHIR app factory prototype built with **LangGraph** to
 
 This repository focuses on **Workspace A (no PHI)**: deterministic orchestration, FHIR-aware tooling, synthetic testing, and security-first design before any sandbox or production integration.
 
-## Project Presentations & Architecture
-- ![Initial System Architerure Flowchart](docs/FlowChart_V2_Initial_Architecture.pdf)
-- [Data Cleaning Slides](https://docs.google.com/presentation/d/1QiqeyA42dcLHQ16w39Zf8XnDen2NCKx0mYlQqkplOsc/edit?usp=sharing)
-- [LangGraph Architecture Slides]
-- [MCP Integration Slides]
-- [Validation Layer Slides]
-- [Final Presentation (PDF)]
-
-### Goals
-
-This project demonstrates how a SMART-on-FHIR application can be:
-
-- Designed **deterministically**
-- Built with **least-privilege SMART scopes**
-- Audited through **reproducible artifacts**
-- Governed through **explicit workspace boundaries**
-
-the focus is on **correct orchestration, safe data boundaries, and reproducibility**, aligned with Epic SMART-on-FHIR constraints.
-
-
-### Architectural blueprint
+## Project Architecture & Presentations
+### Architecture
+- [Sponsor Blueprint (Mermaid)](docs/Architecture_Blueprint_Sponsor_Mermaid.md)
+- [Initial System Flowchart (Team Visualization)](docs/FlowChart_V2_Initial_Architecture.pdf)
 
 This implementation follows a **workspace-based escalation model**:
 
@@ -39,6 +22,23 @@ Future work (not included in this repository):
 - **Workspace B**: Epic sandbox integration
 - **Workspace C**: Secure PHI enclave (break-glass only)
 
+### Presentations
+- [Data Cleaning Slides](https://docs.google.com/presentation/d/1QiqeyA42dcLHQ16w39Zf8XnDen2NCKx0mYlQqkplOsc/edit?usp=sharing)
+- [LangGraph Architecture Slides]
+- [MCP Integration Slides]
+- [Validation Layer Slides]
+- [Final Presentation (PDF)]
+
+## Goals
+
+This project demonstrates how a SMART-on-FHIR application can be:
+
+- Designed **deterministically**
+- Built with **least-privilege SMART scopes**
+- Audited through **reproducible artifacts**
+- Governed through **explicit workspace boundaries**
+
+the focus is on **correct orchestration, safe data boundaries, and reproducibility**, aligned with Epic SMART-on-FHIR constraints.
 
 ## Repository structure
 
@@ -110,13 +110,6 @@ LANGCHAIN_PROJECT=Capstone-ED
 - Synthetic FHIR data
 - Epic SMART design constraints
 - Security-first design
-
-## Project Status
-
-- Workspace A (design + scaffolding)
-- Workspace B (Epic sandbox) — following
-- Workspace C (secure PHI enclave) — out of scope
-
 
 ## Disclaimer
 
