@@ -2,8 +2,15 @@
 
 Capstone_ER is a SMART-on-FHIR app factory prototype built with **LangGraph** to support the design, validation, and secure scaffolding of Epic-compatible SMART applications.
 
-This repository focuses on **Workspace A (no PHI)**: deterministic orchestration, FHIR-aware tooling, synthetic testing, and security-first design — before any sandbox or production integration.
+This repository focuses on **Workspace A (no PHI)**: deterministic orchestration, FHIR-aware tooling, synthetic testing, and security-first design before any sandbox or production integration.
 
+## Project Presentations & Architecture
+- ![Initial System Architerure Flowchart](docs/FlowChart_V2_Initial_Architecture.pdf)
+- [Data Cleaning Slides](https://docs.google.com/presentation/d/1QiqeyA42dcLHQ16w39Zf8XnDen2NCKx0mYlQqkplOsc/edit?usp=sharing)
+- [LangGraph Architecture Slides]
+- [MCP Integration Slides]
+- [Validation Layer Slides]
+- [Final Presentation (PDF)]
 
 ### Goals
 
@@ -82,7 +89,10 @@ Capstone-ER/
 │
 ├─ .env        # API keys (ignored)
 ├─ .gitignore
-└─ README.md
+├─ README.md
+└─ docs/
+    ├─ Capstone-ED_Final_Presentation.pdf
+    └── FlowChart_V2_Initial_Architecture.pdf
 ```
 #### Environment variables (`.env`)
 ```
