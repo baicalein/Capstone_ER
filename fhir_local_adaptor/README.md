@@ -1,8 +1,8 @@
-# fhir_loader
+# fhir_local_adaptor
 
 ### Purpose
 
-the `fhir_loader` module provides local-only abstraction layer over FHIR data.
+the `fhir_local_adaptor` module provides local-only abstraction layer over FHIR data.
 It allows downstream agents to reason over FHIR structure and relationships without direct
 interaction with raw JSON files.
 
