@@ -45,11 +45,13 @@ the focus is on **correct orchestration, safe data boundaries, and reproducibili
 ```text
 Capstone-ER/
 ├─ agent_system/              # LangGraph-based multi-agent orchestration
+|  ├─ README.md
 │  ├─ graph.py                # control flow & checkpoints
 |  ├─ graph_llm.py            # LLM-based graph (test demo / future)
 │  ├─ state.py                # shared, PHI-safe state schema
 │  ├─ router.py               # Agent routing logic
 │  ├─ agents/
+│  │  ├─ README.md
 │  │  ├─ requirements.py      # Clinical or operational needs → technical intent
 |  |  ├─ requirements_LLM.py  # LLM-powered (test demo / future)
 │  │  ├─ fhir_mapping.py      # Intent → FHIR resources & fields
@@ -60,8 +62,21 @@ Capstone-ER/
 │     ├─ fhir_schema_tools.py # FHIR schema helper
 │     ├─ synthetic_data.py    # synthetic FHIR generators
 │     └─ static_analysis.py   # Security-gate helpers
-│
-├─ fhir_loader/               # local FHIR adapter
+|
+├─ validation/
+|
+├─ mcp/
+|   ├─ README.md              # HAPI FHIR + WSO2 MCP Docker setup
+|
+├─ fhir_server/
+|   ├─ README.md               # HAPI Docker setup
+|   ├─ validation_pipeline/
+|   |  ├─ missing_resource_analyzer.py
+|   |  ├── clean_load_fhir_dataset.py
+|   |  └── README.md          # dataset prep + loader to HAPI
+|   └── test_queries.py
+|
+├─ fhir_local_loader/         # local FHIR adapter
 │  ├─ config.py
 │  ├─ file_scanner.py         # iterate local FHIR JSON files
 │  ├─ resource_parser.py      # normalizes FHIR resources
