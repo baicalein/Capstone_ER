@@ -17,3 +17,5 @@ langsmith_runs/
 
 # OS
 .DS_Store
+
+minimal_resources/
