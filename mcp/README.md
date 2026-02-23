@@ -64,36 +64,3 @@ If successful, you should see:
 ```
 Uvicorn running on http://0.0.0.0:8000
 ```
-
-## Verify MCP is working
-
-List avaiable tools
-```bash
-curl -X POST http://localhost:8000/mcp/tools \
-  -H "Content-Type: application/json" \
-  -H "Accept: application/json, text/event-stream" \
-  -d '{
-    "jsonrpc": "2.0",
-    "id": "1",
-    "method": "tools/list"
-  }'
-  ```
-Example: search patient resources
-```bash
-curl -X POST http://localhost:8000/mcp/tools \
-  -H "Content-Type: application/json" \
-  -H "Accept: application/json, text/event-stream" \
-  -d '{
-    "jsonrpc": "2.0",
-    "id": "2",
-    "method": "tools/call",
-    "params": {
-      "name": "search",
-      "arguments": {
-        "type": "Patient",
-        "searchParam": {}
-      }
-    }
-  }'
-  ```
-  Expected result: a FHIR Bundle containing Patient resources & "isError": false
