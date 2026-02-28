@@ -1,0 +1,25 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# uv files
+*.lock
+
+# data files
+*.csv
+
+# test/output folders
+sandbox
+to-delete
+out
+old*
+
+# macOS related
+.DS_Store
