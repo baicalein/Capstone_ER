@@ -4,11 +4,6 @@ Capstone_ER is a SMART-on-FHIR app factory prototype built with **LangGraph** to
 
 This repository focuses on **Workspace A (No PHI)**: deterministic orchestration, FHIR-aware tooling, synthetic testing, and security-first design before any sandbox or production integration.
 
-## Project Architecture & Presentations
-### Architecture
-- [Sponsor Blueprint (Mermaid)](docs/Architecture_Blueprint_Sponsor_Mermaid.md)
-- [Initial System Flowchart (Team Visualization)](docs/FlowChart_V2_Initial_Architecture.pdf)
-
 This implementation follows a **workspace-based escalation model**:
 
 #### Workspace A — Design & Scaffolding
@@ -21,13 +16,6 @@ This implementation follows a **workspace-based escalation model**:
 Future work (not included in this repository):
 - **Workspace B**: Epic sandbox integration
 - **Workspace C**: Secure PHI enclave (break-glass only)
-
-### Presentations
-- [Data Cleaning Slides](https://docs.google.com/presentation/d/1QiqeyA42dcLHQ16w39Zf8XnDen2NCKx0mYlQqkplOsc/edit?usp=sharing)
-- [LangGraph Architecture Slides]
-- [MCP Integration Slides]
-- [Validation Layer Slides]
-- [Final Presentation (PDF)]
 
 ## Goals
 
