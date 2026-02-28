@@ -1,0 +1,24 @@
+[project]
+name = "uscore-synth"
+version = "0.1.0"
+description = "Generate synthetic FHIR data closely aligned with US Core profile v8.0.1 STU8 R4"
+authors = [
+    {name = "Silwal, Rupesh *HS",email = "rs3te@uvahealth.org"}
+]
+
+packages = [{ include = "uscore_synth", from = "src"}]
+
+readme = "README.md"
+
+requires-python = ">=3.12"
+
+dependencies = [
+    "faker",
+]
+
+[tool.poetry.scripts]
+uscore-synth = "uscore_synth.cli:main"
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
