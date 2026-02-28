@@ -1,3 +1,5 @@
+The following information in this folder was provided by our sponsors the UVAHealth Team:
+
 # 🧬 Synthetic FHIR Data Generator
 A Python module for generating realistic, standards‑compliant synthetic FHIR resources.
 
