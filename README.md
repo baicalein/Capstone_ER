@@ -109,10 +109,15 @@ Capstone-ER/
 │  └─ synthetic_case.ipynb
 │
 ├─ FHIR Synthetic Data/
-│  ├─
-│  ├─
-│  ├─
-│  └─
+│   ├── src/uscore_synth/
+│   │   ├── __init__.py
+│   │   ├── cli.py
+│   │   ├── config.py
+│   │   └── generator.py
+│   ├── pyproject.toml
+│   ├── set_java_path.ps1
+│   └── README.md
+│
 ├─ .env        # API keys (ignored)
 ├─ .gitignore
 ├─ README.md
