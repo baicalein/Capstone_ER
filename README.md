@@ -33,28 +33,43 @@ The focus is on **orchestration, safe data boundaries, and reproducibility**, al
 ```text
 Capstone-ER/
 ├─ agent_system/              # LangGraph-based multi-agent orchestration
-|  ├─ README.md
+|  ├─ README.md               # How to run agent system
+|  ├─ ARCHITECTURE_OVERVIEW.md # ER snapshot agent workflow + logic
 │  ├─ graph.py                # control flow & checkpoints
 |  ├─ graph_llm.py            # LLM-based graph (test demo / future)
 │  ├─ state.py                # shared, PHI-safe state schema
-│  ├─ router.py               # Agent routing logic
-│  ├─ agents/
+│  ├─ router.py               # Agent routing logic (may replace with Command routing)
+│  ├─ agents/                 # Nodes
 │  │  ├─ README.md
 │  │  ├─ requirements.py      # Clinical or operational needs → technical intent
-|  |  ├─ requirements_LLM.py  # LLM-powered (test demo / future)
+|  |  ├─ requirements_LLM.py  # LLM-powered extract patient_id + use_case
+│  │  ├─ validation_layer.py  # Policy enforcement + interrupt()
+│  │  ├─ mcp_executor.py      # Call MCP (RetryPolicy attachment)
+│  │  ├─ aggregation.py       # Combine patient + ER + Meds + Allergies
+│  │  ├─ snapshot_generator.py # LLM-based ER summary formatting
 │  │  ├─ fhir_mapping.py      # Intent → FHIR resources & fields
 │  │  ├─ smart_compile.py     # SMART scopes & launch context
 │  │  ├─ scaffold.py          # repo / boilerplate generation
 │  │  └─ test_agent.py        # Synthetic test generation
+│  ├─ error_handling/
+│  │  ├─ retry_policies.py    # RetryPolicy configs (MCP only)
+│     └─ error_types.py       # Custom ToolError/Validaiton error 
 │  └─ tools/
 │     ├─ fhir_schema_tools.py # FHIR schema helper
 │     ├─ synthetic_data.py    # synthetic FHIR generators
 │     └─ static_analysis.py   # Security-gate helpers
 |
-├─ validation/
+├─ validation/                # Governance enforcement
+|   ├─ README.md
+|   ├─ policy_rules.py        # allowed use cases
+|   ├─ er_filter.py           # Enforce ER encounter scoping
+|   ├─ read_only_enforcement.py # Block create/update/delete
+|   └── argument_cleaner.py   # Clean unsage tool parameters
 |
 ├─ mcp/
 |   ├─ README.md              # HAPI FHIR + WSO2 MCP Docker setup
+|   ├─ mcp_cient.py          # wrapper around MCP tools
+|   └─ tool_registry.py       # Allowed tool definition
 |
 ├─ fhir_server/
 |   ├─ README.md               # HAPI Docker setup
@@ -63,6 +78,13 @@ Capstone-ER/
 |   |  ├── clean_load_fhir_dataset.py
 |   |  └── README.md          # dataset prep + loader to HAPI
 |   └── test_queries.py
+├─ audit/                     # Trace store
+|   ├─ README.md              
+|   ├─ audit_logger.py        # Idempotent log_event()
+|   ├─ decorator.py           # @audited-node decorator
+|   ├─ trace_writer.py        # execution traces (per run id)
+|   ├─ schemas.py             # structured audit event schemas
+|   └─ trace_store.jsonl      # execution logs
 |
 ├─ fhir_local_loader/         # local FHIR adapter
 │  ├─ config.py
@@ -81,15 +103,16 @@ Capstone-ER/
 │  ├─ generated_repo/
 │  └─ configs/
 │
-├─ trace_store/               # Audit & explainability
-│  ├─ agent_decisions.jsonl
-│  └─ langsmith_runs/
-│
 ├─ notebooks/                 # sandbox for exploration & validation
 │  ├─ FHIR_exploration.ipynb
 |  |─ langsmith_demo.ipynb
 │  └─ synthetic_case.ipynb
 │
+├─ FHIR Synthetic Data/
+│  ├─
+│  ├─
+│  ├─
+│  └─
 ├─ .env        # API keys (ignored)
 ├─ .gitignore
 ├─ README.md
@@ -104,6 +127,10 @@ LANGSMITH_API_KEY=your_langsmith_key
 LANGCHAIN_TRACING_V2=true
 LANGCHAIN_PROJECT=Capstone-ED
 ```
+## Architecture
+
+For a detailed system design, see the  
+[Architecture Overview](agent_system/ARCHITECTURE_OVERVIEW.md).
 
 ## Technologies used
 
