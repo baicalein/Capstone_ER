@@ -50,7 +50,7 @@ docker pull wso2/fhir-mcp-server:latest
 ```bash
 touch .env
 ```
-add this
+add the following lines into the .env file and save
 ```
 FHIR_SERVER_BASE_URL=http://host.docker.internal:8080/fhir
 FHIR_SERVER_DISABLE_AUTHORIZATION=True
