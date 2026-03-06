@@ -39,7 +39,7 @@ Capstone-ER/
 |  ├─ graph_llm.py            # LLM-based graph (test demo / future)
 │  ├─ state.py                # shared, PHI-safe state schema
 │  ├─ router.py               # Agent routing logic (may replace with Command routing)
-│  ├─ nodes/                  # Nodes = agents
+│  ├─ agents/                  # Nodes = agents
 │  │  ├─ README.md
 │  │  ├─ requirements.py      # Clinical or operational needs → technical intent
 |  |  ├─ requirements_LLM.py  # LLM-powered extract patient_id + use_case
