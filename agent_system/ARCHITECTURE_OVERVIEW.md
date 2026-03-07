@@ -36,7 +36,6 @@ flowchart TD
     @audited_node
     - interrupt() if missing patient_id
     - Enforce allowed use_case
-    - Enforce ER-only policy
     - Reject violations
     - Log validation result"]
 
@@ -45,6 +44,7 @@ flowchart TD
     - RetryPolicy lives here
     - Handle timeout / rate limit
     - Automatic retry
+    - Enforce ER-only policy
     - Idempotent audit logging"]
 
     E["FHIR SERVER - HAPI"]
