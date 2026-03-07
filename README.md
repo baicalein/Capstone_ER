@@ -128,9 +128,11 @@ Capstone-ER/
 #### Environment variables (`.env`)
 ```
 OPENAI_API_KEY=sponsor_openai_key
-LANGSMITH_API_KEY=your_langsmith_key
+LANGSMITH_API_KEY=sponsor_langsmith_key
 LANGCHAIN_TRACING_V2=true
-LANGCHAIN_PROJECT=Capstone-ED
+LANGCHAIN_PROJECT=Capstone_ER
+LANGSMITH_ENDPOINT=https://api.smith.langchain.com
+FHIR_DATA_ROOT= (Optional)
 ```
 ## Architecture
 
