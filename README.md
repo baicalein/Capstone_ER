@@ -36,40 +36,30 @@ Capstone-ER/
 |  ├─ README.md               # How to run agent system
 |  ├─ ARCHITECTURE_OVERVIEW.md # ER snapshot agent workflow + logic
 │  ├─ graph.py                # control flow & checkpoints
-|  ├─ graph_llm.py            # LLM-based graph (test demo / future)
+|  ├─ graph_llm.py            # LLM-based graph (test demo)
+|  ├─ ERGraph.py              # LLM-based graph (for ER snapshot usecase)
 │  ├─ state.py                # shared, PHI-safe state schema
-│  ├─ router.py               # Agent routing logic (may replace with Command routing)
-│  ├─ agents/                  # Nodes = agents
+│  ├─ ERstate.py              # For ER snapshot usecase
+│  ├─ router.py               # Multi-agent routing logic (may replace with Command routing)
+│  ├─ agents/                 # Nodes
 │  │  ├─ README.md
 │  │  ├─ requirements.py      # Clinical or operational needs → technical intent
-|  |  ├─ requirements_LLM.py  # LLM-powered extract patient_id + use_case
-│  │  ├─ validation_layer.py  # Policy enforcement + interrupt()
+|  |  ├─ requirements_LLM.py  # LLM-powered extract patient_id + use_case (demo)
+|  |  ├─ requirements_LLM2.py # LLM-powered extract patient_id + ER snapshot usecase
+│  │  ├─ validation_layer.py  # Policy enforcement + interrupt(): ER snapshot usecase
 │  │  ├─ mcp_executor.py      # Call MCP (RetryPolicy attachment)
-│  │  ├─ aggregation.py       # Combine patient + ER + Meds + Allergies
-│  │  ├─ snapshot_generator.py # LLM-based ER summary formatting
-│  │  ├─ fhir_mapping.py      # Intent → FHIR resources & fields
-│  │  ├─ smart_compile.py     # SMART scopes & launch context
-│  │  ├─ scaffold.py          # repo / boilerplate generation
-│  │  └─ test_agent.py        # Synthetic test generation
+│  │  ├─ aggregation.py       # Combine patient + ER + Meds + Allergies: ER snapshot usecase
+│  │  ├─ snapshot_generator.py # LLM-based ER summary formatting: ER snapshot usecase
+│  │  └─ fhir_mapping.py      # Intent → FHIR resources & fields (demo)
 │  ├─ error_handling/
 │  │  ├─ retry_policies.py    # RetryPolicy configs (MCP only)
-│     └─ error_types.py       # Custom ToolError/Validaiton error 
-│  └─ tools/
-│     ├─ fhir_schema_tools.py # FHIR schema helper
-│     ├─ synthetic_data.py    # synthetic FHIR generators
-│     └─ static_analysis.py   # Security-gate helpers
+│  │  └─ error_types.py       # Custom ToolError/Validaiton error 
+│  └─ utils/
+│     └─ debug_trace.py       # replaceable with LangSmith
 |
-├─ validation/                # Governance enforcement
-|   ├─ README.md
-|   ├─ policy_rules.py        # allowed use cases
-|   ├─ er_filter.py           # Enforce ER encounter scoping
-|   ├─ read_only_enforcement.py # Block create/update/delete
-|   └── argument_cleaner.py   # Clean unsage tool parameters
-|
-├─ mcp/
+├─ mcp_client/
 |   ├─ README.md              # HAPI FHIR + WSO2 MCP Docker setup
-|   ├─ mcp_cient.py          # wrapper around MCP tools
-|   └─ tool_registry.py       # Allowed tool definition
+|   └─ mcp_cient.py          # wrapper around MCP tools
 |
 ├─ fhir_server/
 |   ├─ README.md               # HAPI Docker setup
@@ -105,7 +95,8 @@ Capstone-ER/
 │
 ├─ notebooks/                 # sandbox for exploration & validation
 │  ├─ FHIR_exploration.ipynb
-|  |─ langsmith_demo.ipynb
+|  |─ langsmith_demo.ipynb   # test demo
+|  |─ run_er_snalshot.py     # run langsmith/ER snapshot usecase
 │  └─ synthetic_case.ipynb
 │
 ├─ FHIR Synthetic Data/
