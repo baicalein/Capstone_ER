@@ -1,4 +1,4 @@
-## Capstone_ER
+# Capstone_ER
 
 Capstone_ER is a SMART-on-FHIR app factory prototype built with **LangGraph** to support the design, validation, and secure scaffolding of Epic-compatible SMART applications.
 
@@ -28,93 +28,97 @@ This project demonstrates how a SMART-on-FHIR application can be:
 
 The focus is on **orchestration, safe data boundaries, and reproducibility**, aligned with Epic SMART-on-FHIR constraints.
 
+## Workflow Architecture
+The system follows a deterministic pipeline to transform clinical intent into a structured medical snapshot.
+
 ## Repository structure
 
 ```text
 Capstone-ER/
-├─ agent_system/              # LangGraph-based multi-agent orchestration
-|  ├─ README.md               # How to run agent system
-|  ├─ ARCHITECTURE_OVERVIEW.md # ER snapshot agent workflow + logic
-│  ├─ graph.py                # control flow & checkpoints
-|  ├─ graph_llm.py            # LLM-based graph (test demo)
-|  ├─ ERGraph.py              # LLM-based graph (for ER snapshot usecase)
-│  ├─ state.py                # shared, PHI-safe state schema
-│  ├─ ERstate.py              # For ER snapshot usecase
-│  ├─ router.py               # Multi-agent routing logic (may replace with Command routing)
-│  ├─ agents/                 # Nodes
+├─ agent_system/               # LangGraph-based multi-agent orchestration
+│  ├─ README.md                # How to run agent system
+│  ├─ ARCHITECTURE_OVERVIEW.md  # ER snapshot agent workflow + logic
+│  ├─ graph.py                 # Control flow & checkpoints
+│  ├─ graph_llm.py             # LLM-based graph (test demo)
+│  ├─ ERGraph.py               # LLM-based graph (for ER snapshot use-case)
+│  ├─ state.py                 # Shared, PHI-safe state schema
+│  ├─ ERstate.py               # State for ER snapshot use-case
+│  ├─ router.py                # Multi-agent routing logic
+│  ├─ agents/                  # Node implementations
 │  │  ├─ README.md
-│  │  ├─ requirements.py      # Clinical or operational needs → technical intent
-|  |  ├─ requirements_LLM.py  # LLM-powered extract patient_id + use_case (demo)
-|  |  ├─ requirements_LLM2.py # LLM-powered extract patient_id + ER snapshot usecase
-│  │  ├─ validation_layer.py  # Policy enforcement + interrupt(): ER snapshot usecase
-│  │  ├─ mcp_executor.py      # Call MCP (RetryPolicy attachment)
-│  │  ├─ aggregation.py       # Combine patient + ER + Meds + Allergies: ER snapshot usecase
-│  │  ├─ snapshot_generator.py # LLM-based ER summary formatting: ER snapshot usecase
-│  │  └─ fhir_mapping.py      # Intent → FHIR resources & fields (demo)
-│  ├─ error_handling/
-│  │  ├─ retry_policies.py    # RetryPolicy configs (MCP only)
-│  │  └─ error_types.py       # Custom ToolError/Validaiton error 
+│  │  ├─ requirements.py       # Clinical or operational needs to technical intent
+│  │  ├─ requirements_LLM.py   # LLM extracts patient_id + use_case (demo)
+│  │  ├─ requirements_LLM2.py  # LLM extracts patient_id for ER snapshot
+│  │  ├─ validation_layer.py    # Policy enforcement & interrupt()
+│  │  ├─ mcp_executor.py       # Call MCP + ER encounter filtering logic
+│  │  ├─ aggregation.py        # Combine patient + ER + Meds + Allergies
+│  │  ├─ snapshot_generator.py  # LLM-based ER summary formatting
+│  │  └─ fhir_mapping.py       # Intent to FHIR resources & fields (demo)
+│  ├─ error_handling/          # Reliability layer
+│  │  ├─ retry_policies.py     # RetryPolicy configs (MCP only)
+│  │  └─ error_types.py        # Custom ToolError/Validation error 
 │  └─ utils/
-│     └─ debug_trace.py       # replaceable with LangSmith
+│     └─ debug_trace.py        # Local trace utility (replaces LangSmith)
 |
-├─ mcp_client/
-|   ├─ README.md              # HAPI FHIR + WSO2 MCP Docker setup
-|   └─ mcp_cient.py          # wrapper around MCP tools
+├─ mcp_client/                 # Renamed from /mcp to avoid package conflict
+│  ├─ README.md                # HAPI FHIR + WSO2 MCP Docker setup
+│  └─ mcp_client.py            # Local wrapper around MCP tools
 |
-├─ fhir_server/
-|   ├─ README.md               # HAPI Docker setup
-|   ├─ validation_pipeline/
-|   |  ├─ missing_resource_analyzer.py
-|   |  ├── clean_load_fhir_dataset.py
-|   |  └── README.md          # dataset prep + loader to HAPI
-|   └── test_queries.py
-├─ audit/                     # Trace store
-|   ├─ README.md              
-|   ├─ audit_logger.py        # Idempotent log_event()
-|   ├─ decorator.py           # @audited-node decorator
-|   ├─ trace_writer.py        # execution traces (per run id)
-|   ├─ schemas.py             # structured audit event schemas
-|   └─ trace_store.jsonl      # execution logs
+├─ fhir_server/                # FHIR environment management
+│  ├─ README.md                # HAPI Docker setup
+│  ├─ validation_pipeline/
+│  │  ├─ missing_resource_analyzer.py
+│  │  ├─ clean_load_fhir_dataset.py
+│  │  └─ README.md             # Dataset prep + loader to HAPI
+│  └─ test_queries.py
 |
-├─ fhir_local_loader/         # local FHIR adapter
+├─ audit/                      # Trace store for compliance
+│  ├─ README.md                
+│  ├─ audit_logger.py          # Idempotent log_event()
+│  ├─ decorator.py             # @audited_node decorator
+│  ├─ trace_writer.py          # Execution traces (per run id)
+│  ├─ schemas.py               # Structured audit event schemas
+│  └─ trace_store.jsonl        # Local execution logs
+|
+├─ fhir_local_loader/          # Local FHIR adapter
 │  ├─ config.py
-│  ├─ file_scanner.py         # iterate local FHIR JSON files
-│  ├─ resource_parser.py      # normalizes FHIR resources
-│  ├─ index_builder.py        # build encounter-level index
-│  ├─ resource_index.py       # read-only query interface
-│  └─ patient_index.py        # patient-level derived index
+│  ├─ file_scanner.py          # Iterate local FHIR JSON files
+│  ├─ resource_parser.py       # Normalizes FHIR resources
+│  ├─ index_builder.py         # Build encounter-level index
+│  ├─ resource_index.py        # Read-only query interface
+│  └─ patient_index.py         # Patient-level derived index
 │
-├─ security_gate/             # pre-integration safety checks
+├─ security_gate/              # Pre-integration safety checks
 │  ├─ scan_secrets.py
 │  ├─ scan_logging.py
 │  └─ scan_data_handling.py
 │
-├─ artifact_store/            # reproducible outputs
+├─ artifact_store/             # Reproducible outputs
 │  ├─ generated_repo/
 │  └─ configs/
 │
-├─ notebooks/                 # sandbox for exploration & validation
+├─ notebooks/                  # Sandbox for exploration & validation
 │  ├─ FHIR_exploration.ipynb
-|  |─ langsmith_demo.ipynb   # test demo
-|  |─ run_er_snalshot.py     # run langsmith/ER snapshot usecase
+│  ├─ langsmith_demo.ipynb     # Test demo
+│  ├─ run_er_snapshot.py       # Entry point: run from project root
 │  └─ synthetic_case.ipynb
 │
-├─ FHIR Synthetic Data/
-│   ├── src/uscore_synth/
-│   │   ├── __init__.py
-│   │   ├── cli.py
-│   │   ├── config.py
-│   │   └── generator.py
-│   ├── pyproject.toml
-│   ├── set_java_path.ps1
-│   └── README.md
+├─ FHIR Synthetic Data/        # Data generation tools
+│  ├─ src/uscore_synth/
+│  │  ├─ __init__.py
+│  │  ├─ cli.py
+│  │  ├─ config.py
+│  │  └─ generator.py
+│  ├─ pyproject.toml
+│  ├─ set_java_path.ps1
+│  └─ README.md
 │
-├─ .env        # API keys (ignored)
+├─ .env                        # API keys (ignored)
 ├─ .gitignore
 ├─ README.md
 └─ docs/
-    ├─ Capstone-ED_Final_Presentation.pdf
-    └── FlowChart_V2_Initial_Architecture.pdf
+   ├─ Capstone-ED_Final_Presentation.pdf
+   └─ FlowChart_V2_Initial_Architecture.pdf
 ```
 #### Environment variables (`.env`)
 ```
