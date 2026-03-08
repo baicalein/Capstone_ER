@@ -28,9 +28,6 @@ This project demonstrates how a SMART-on-FHIR application can be:
 
 The focus is on **orchestration, safe data boundaries, and reproducibility**, aligned with Epic SMART-on-FHIR constraints.
 
-## Workflow Architecture
-The system follows a deterministic pipeline to transform clinical intent into a structured medical snapshot.
-
 ## Repository structure
 
 ```text
@@ -131,8 +128,7 @@ FHIR_DATA_ROOT= (Optional)
 ```
 ## Architecture
 
-For a detailed system design, see the  
-[Architecture Overview](agent_system/ARCHITECTURE_OVERVIEW.md).
+The system follows a deterministic pipeline to transform clinical intent into a structured medical snapshot. For a detailed system design, see the following: [Architecture Overview](agent_system/ARCHITECTURE_OVERVIEW.md).
 
 ## Technologies used
 
