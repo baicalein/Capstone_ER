@@ -4,8 +4,10 @@
 ![LangGraph](https://img.shields.io/badge/orchestration-LangGraph-purple)
 ![FHIR](https://img.shields.io/badge/standard-FHIR-orange)
 ![Workspace](https://img.shields.io/badge/workspace-A%20(No%20PHI)-brightgreen)
-![PHI](https://img.shields.io/badge/data-synthetic%20FHIR-blue)
+![Data](https://img.shields.io/badge/data-synthetic%20FHIR-blue)
 ![Status](https://img.shields.io/badge/status-research%20prototype-yellow)
+
+
 Capstone_ER is a SMART-on-FHIR app factory prototype built with **LangGraph** to support the design, validation, and secure scaffolding of Epic-compatible SMART applications.
 
 This repository focuses on **Workspace A (No PHI)**: deterministic orchestration, FHIR-aware tooling, synthetic testing, and security-first design before any sandbox or production integration.
