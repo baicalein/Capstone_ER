@@ -133,6 +133,7 @@ LANGCHAIN_TRACING_V2=true
 LANGCHAIN_PROJECT=Capstone_ER
 LANGSMITH_ENDPOINT=https://api.smith.langchain.com
 FHIR_DATA_ROOT= (Optional)
+TRACE_FILE = [path to trace_store.jsonl] (example: /Capstone_ER/audit/trace_store.jsonl)
 ```
 ## Architecture
 
