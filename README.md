@@ -25,6 +25,8 @@ Future work (not included in this repository):
 - **Workspace B**: Epic sandbox integration
 - **Workspace C**: Secure PHI enclave (break-glass only)
 
+***Navigate to the [wiki page](https://github.com/baicalein/Capstone_ER/wiki) for additional information on the project and for the user set up guide.***
+
 ## Goals
 
 This project demonstrates how a SMART-on-FHIR application can be:
