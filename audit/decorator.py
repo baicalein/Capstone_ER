@@ -9,7 +9,7 @@ from audit.audit_logger import log_event
 def audited_node(func):
     """
     Decorator supporting BOTH sync and async LangGraph nodes.
-    Adds audit timing and debug traces.
+    Adds audit timing, error handling, and debug traces.
     """
 
     if inspect.iscoroutinefunction(func):
@@ -19,39 +19,56 @@ def audited_node(func):
             node_name = func.__name__
             run_id = kwargs.get("run_id") or str(uuid.uuid4())
 
-            start = time.time()
+            start_time = time.time()
+            start_event_id = str(uuid.uuid4())
 
             debug_trace(f"{node_name} (audit_start)", state)
 
-            # start audit
-            start_event_id = str(uuid.uuid4())
+            # START EVENT
             log_event({
                 "event_id": start_event_id,
                 "run_id": run_id,
                 "node": node_name,
                 "status": "started",
+                "start_ts": start_time,
                 "input": state
             })
 
-            result = await func(state, *args, **kwargs)
+            try:
+                result = await func(state, *args, **kwargs)
+                status = "completed"
+                error = None
 
-            duration = round(time.time() - start, 3)
+            except Exception as e:
+                result = None
+                status = "error"
+                error = str(e)
+
+            end_time = time.time()
+            latency_ms = round((end_time - start_time) * 1000, 2)
 
             debug_trace(
                 f"{node_name} (audit_end)",
-                {"duration_seconds": duration}
+                {"status": status, "latency_ms": latency_ms}
             )
 
-            # complete audit
+            # END EVENT (success OR failure)
             log_event({
                 "event_id": str(uuid.uuid4()),
                 "parent_event_id": start_event_id,
                 "run_id": run_id,
                 "node": node_name,
-                "status": "completed",
-                "duration_seconds": duration,
-                "output": result
+                "status": status,
+                "start_ts": start_time,
+                "end_ts": end_time,
+                "latency_ms": latency_ms,
+                "output": result,
+                "error": error
             })
+
+            # Re-raise error so system behavior doesn't change
+            if status == "error":
+                raise
 
             return result
 
@@ -64,39 +81,55 @@ def audited_node(func):
             node_name = func.__name__
             run_id = kwargs.get("run_id") or str(uuid.uuid4())
 
-            start = time.time()
+            start_time = time.time()
+            start_event_id = str(uuid.uuid4())
 
             debug_trace(f"{node_name} (audit_start)", state)
 
-            # start audit
-            start_event_id = str(uuid.uuid4())
+            # START EVENT
             log_event({
                 "event_id": start_event_id,
                 "run_id": run_id,
                 "node": node_name,
                 "status": "started",
+                "start_ts": start_time,
                 "input": state
             })
 
-            result = func(state, *args, **kwargs)
+            try:
+                result = func(state, *args, **kwargs)
+                status = "completed"
+                error = None
 
-            duration = round(time.time() - start, 3)
+            except Exception as e:
+                result = None
+                status = "error"
+                error = str(e)
+
+            end_time = time.time()
+            latency_ms = round((end_time - start_time) * 1000, 2)
 
             debug_trace(
                 f"{node_name} (audit_end)",
-                {"duration_seconds": duration}
+                {"status": status, "latency_ms": latency_ms}
             )
 
-            # complete audit
+            # END EVENT
             log_event({
                 "event_id": str(uuid.uuid4()),
                 "parent_event_id": start_event_id,
                 "run_id": run_id,
                 "node": node_name,
-                "status": "completed",
-                "duration_seconds": duration,
-                "output": result
+                "status": status,
+                "start_ts": start_time,
+                "end_ts": end_time,
+                "latency_ms": latency_ms,
+                "output": result,
+                "error": error
             })
+
+            if status == "error":
+                raise
 
             return result
 
