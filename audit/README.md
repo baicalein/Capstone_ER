@@ -50,7 +50,7 @@ All nodes that are audited will automatically be logged to the trace_store.jsonl
 
 ### Current Limitations/Future Improvements
 
--   Currently if an event has an error or fails an event can have a start and no end
+-   Currently if an event has an error or fails an event can have a start and no end, additional testing is needed to verify the current capabilities of error logging.
 
 -   The JSONL file will eventually be large and it will be difficult to query and find errors.
     Potential fixes:
