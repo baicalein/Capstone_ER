@@ -17,7 +17,7 @@ The purpose of a JSONL file is for easy processing, to diagnose failures quickly
 
 ### Core Components
 
--   `audit_logger`\
+-   `audit_logger.py`\
     logging start point; enforces schema and prevents duplicates
 
 -   `decorator.py`\
