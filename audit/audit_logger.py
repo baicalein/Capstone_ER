@@ -20,13 +20,17 @@ def log_event(event: dict):
 
     _seen_event_ids.add(event_id)
 
-    # Defaults
+    # Required defaults (schema-aligned)
+    event.setdefault("run_id", "default_run")
     event.setdefault("node", "unknown_node")
     event.setdefault("status", "unknown_status")
-    event.setdefault("timestamp", time.time())
-    event.setdefault("run_id", "default_run")
 
-    # Ensure schema consistency
+    event.setdefault("parent_event_id", None)
+
+    event.setdefault("start_ts", time.time())
+    event.setdefault("end_ts", None)
+    event.setdefault("latency_ms", None)
+
     event.setdefault("input", None)
     event.setdefault("output", None)
     event.setdefault("error", None)
